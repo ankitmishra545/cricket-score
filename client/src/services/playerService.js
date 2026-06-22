@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:5000/api/players";
+const API_URL = "https://cricket-score-8018.onrender.com/api/players";
 
 export const getPlayers = async () => {
   const response = await axios.get(API_URL);
