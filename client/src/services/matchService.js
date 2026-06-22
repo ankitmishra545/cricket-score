@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:5000/api/matches";
+const API_URL = "https://cricket-score-8018.onrender.com/api/matches";
 
 export const createMatch = async (payload) => {
   const response = await axios.post(API_URL, payload);
