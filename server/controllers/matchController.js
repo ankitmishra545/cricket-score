@@ -709,9 +709,6 @@ const addRunOut = async (req, res) => {
 
       nextBatter,
       outPlayer,
-      nextBatter,
-      outPlayer,
-      completedRuns: Number(completedRuns),
 
       teamScore: match[scoreField],
 
@@ -992,10 +989,46 @@ const getMatches = async (req, res) => {
   }
 };
 
+const changeStrike = async (req, res) => {
+  try {
+    const match = await Match.findById(req.params.id);
+
+    if (!match) {
+      return res.status(404).json({
+        message: "Match not found",
+      });
+    }
+
+    const temp = match.striker;
+
+    match.striker = match.nonStriker;
+    match.nonStriker = temp;
+
+    await match.save();
+
+    const updated = await buildMatchResponse(match._id);
+
+    const io = req.app.get("io");
+
+    if (io) {
+      io.to(match._id.toString()).emit("match-updated", updated);
+    }
+
+    res.json(updated);
+  } catch (error) {
+    console.error(error);
+
+    res.status(500).json({
+      message: "Failed to change strike",
+    });
+  }
+};
+
 module.exports = {
   createMatch,
   getMatch,
   startMatch,
+  changeStrike,
   getMatches,
   getScorecard,
   changeBowler,

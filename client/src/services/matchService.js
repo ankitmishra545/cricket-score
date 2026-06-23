@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "https://cricket-score-8018.onrender.com/api/matches";
+const API_URL = `${import.meta.env.VITE_API_URL}/matches`;
 
 export const createMatch = async (payload) => {
   const response = await axios.post(API_URL, payload);
@@ -80,6 +80,12 @@ export const getScorecard = async (id) => {
 
 export const getMatches = async () => {
   const response = await axios.get(API_URL);
+
+  return response.data;
+};
+
+export const changeStrike = async (id) => {
+  const response = await axios.patch(`${API_URL}/${id}/change-strike`);
 
   return response.data;
 };

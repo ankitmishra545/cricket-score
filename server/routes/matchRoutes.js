@@ -12,6 +12,7 @@ const {
   addRunOut,
   changeBowler,
   getScorecard,
+  changeStrike,
   allOut,
 } = require("../controllers/matchController");
 
@@ -32,5 +33,7 @@ router.patch("/:id/runout", addRunOut);
 router.patch("/:id/allout", allOut);
 
 router.get("/:id/scorecard", getScorecard);
+
+router.patch("/:id/change-strike", changeStrike);
 
 module.exports = router;

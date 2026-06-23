@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "https://cricket-score-8018.onrender.com/api/players";
+const API_URL = `${import.meta.env.VITE_API_URL}/players`;
 
 export const getPlayers = async () => {
   const response = await axios.get(API_URL);

@@ -14,6 +14,7 @@ import {
   addRunOut,
   allOut,
   changeBowler,
+  changeStrike,
 } from "../services/matchService";
 
 export default function ScorePage() {
@@ -155,6 +156,12 @@ export default function ScorePage() {
     setMatch(updated);
 
     setShowWicketModal(false);
+  };
+
+  const handleChangeStrike = async () => {
+    const updated = await changeStrike(id);
+
+    setMatch(updated);
   };
 
   const submitRunOut = async () => {
@@ -405,41 +412,117 @@ export default function ScorePage() {
               style={{
                 display: "flex",
                 flexWrap: "wrap",
-                gap: "10px",
+                gap: "16px",
               }}
             >
               {[0, 1, 2, 3, 4, 5, 6].map((run) => (
-                <button key={run} disabled={waitingForBowler || isMatchCompleted} onClick={() => handleRun(run)}>
+                <button
+                  key={run}
+                  disabled={waitingForBowler || isMatchCompleted}
+                  onClick={() => handleRun(run)}
+                  style={{
+                    width: "60px",
+                    height: "60px",
+                    fontSize: "20px",
+                  }}
+                >
                   {run}
                 </button>
               ))}
 
-              <button disabled={waitingForBowler || isMatchCompleted} onClick={handleUndo}>
-                Undo
-              </button>
-
-              <button disabled={waitingForBowler || isMatchCompleted} onClick={() => handleExtra("wide")}>
+              <button
+                disabled={waitingForBowler || isMatchCompleted}
+                onClick={() => handleExtra("wide")}
+                style={{
+                  width: "60px",
+                  height: "60px",
+                  fontSize: "20px",
+                }}
+              >
                 Wide
               </button>
 
-              <button disabled={waitingForBowler || isMatchCompleted} onClick={() => handleExtra("noball")}>
+              <button
+                disabled={waitingForBowler || isMatchCompleted}
+                onClick={() => handleExtra("noball")}
+                style={{
+                  width: "60px",
+                  height: "60px",
+                  fontSize: "20px",
+                }}
+              >
                 No Ball
               </button>
 
-              <button disabled={waitingForBowler || isMatchCompleted} onClick={() => handleExtra("bye")}>
+              <button
+                disabled={waitingForBowler || isMatchCompleted}
+                onClick={() => handleExtra("bye")}
+                style={{
+                  width: "60px",
+                  height: "60px",
+                  fontSize: "20px",
+                }}
+              >
                 Bye
               </button>
 
-              <button disabled={waitingForBowler || isMatchCompleted} onClick={handleWicket}>
+              <button
+                disabled={waitingForBowler || isMatchCompleted}
+                onClick={handleWicket}
+                style={{
+                  width: "60px",
+                  height: "60px",
+                  fontSize: "16px",
+                }}
+              >
                 Wicket
               </button>
 
-              <button disabled={waitingForBowler || isMatchCompleted} onClick={handleRunOut}>
+              <button
+                disabled={waitingForBowler || isMatchCompleted}
+                onClick={handleRunOut}
+                style={{
+                  width: "60px",
+                  height: "60px",
+                  fontSize: "16px",
+                }}
+              >
                 Run Out
               </button>
 
-              <button disabled={waitingForBowler || isMatchCompleted} onClick={handleAllOut}>
+              <button
+                disabled={waitingForBowler || isMatchCompleted}
+                onClick={handleAllOut}
+                style={{
+                  width: "60px",
+                  height: "60px",
+                  fontSize: "16px",
+                }}
+              >
                 All Out
+              </button>
+
+              <button
+                disabled={waitingForBowler || isMatchCompleted}
+                onClick={handleUndo}
+                style={{
+                  width: "60px",
+                  height: "60px",
+                  fontSize: "16px",
+                }}
+              >
+                Undo
+              </button>
+
+              <button
+                onClick={handleChangeStrike}
+                style={{
+                  width: "60px",
+                  height: "60px",
+                  fontSize: "14px",
+                }}
+              >
+                Change Strike
               </button>
             </div>
           </>
